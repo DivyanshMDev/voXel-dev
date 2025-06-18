@@ -1184,19 +1184,142 @@ class TaskListItem extends React.Component {
     let statusIcon = statusCodes.icon(task.status);
 
     // @param type {String} one of: ['neutral', 'done', 'error']
-    const getStatusLabel = (text, type = "neutral") => {
+    const getStatusLabel = (text, type = "neutral", progress = 100) => {
       // Map status types to colors and image names
       const statusStyles = {
         completed: { color: "#05CD99", img: "Completed.png" },
         cancelled: { color: "#bdbdbd", img: "Cancelled.png" },
         failed: { color: "#F26E6E", img: "Failed.png" },
         queued: { color: "#E49009", img: "Queued.png" },
+        resizing: { color: "#E49009", img: "Resizing Images.png" },
       };
 
       // Find matching color based on the image name (text)
       const color =
         Object.values(statusStyles).find((style) => style.img === `${text}.png`)
-          ?.color || statusStyles.neutral.color;
+          ?.color || "#bdbdbd";
+
+      // Special handling for processing state
+      const isProcessing = type === "processing";
+      const progressStyle = isProcessing
+        ? {
+            background: `linear-gradient(90deg, #E49009 ${progress}%, rgba(255, 255, 255, 0) ${progress}%)`,
+          }
+        : {};
+
+      if (isProcessing) {
+        return (
+          <div
+            className="status-label"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              fontWeight: 500,
+              fontSize: "18px",
+              color: "#E49009",
+              background: "none",
+              border: "none",
+              boxShadow: "none",
+            }}
+            title="Processing"
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                width: "100%",
+                marginBottom: "4px",
+              }}
+            >
+              <span>Processing...</span>
+              <span style={{ fontSize: "14px", color: "#E49009" }}>
+                {Math.round(progress)}%
+              </span>
+            </div>
+            <div
+              style={{
+                width: "100%",
+                height: "4px",
+                backgroundColor: "#f0f0f0",
+                borderRadius: "2px",
+                overflow: "hidden",
+              }}
+            >
+              <div
+                style={{
+                  width: `${progress}%`,
+                  height: "100%",
+                  backgroundColor: "#E49009",
+                  borderRadius: "2px",
+                  transition: "width 0.3s ease",
+                }}
+              />
+            </div>
+          </div>
+        );
+      }
+
+      // Check if text indicates processing/running state and should not have an icon
+      const isProcessingText =
+        text.toLowerCase().includes("processing") ||
+        text.toLowerCase().includes("running") ||
+        text.toLowerCase().includes("executing");
+
+      if (isProcessingText) {
+        return (
+          <div
+            className="status-label"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              fontWeight: 500,
+              fontSize: "18px",
+              color: "#E49009",
+              background: "none",
+              border: "none",
+              boxShadow: "none",
+            }}
+            title={text}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                width: "100%",
+                marginBottom: "4px",
+              }}
+            >
+              <span style={{ color: "#E49009" }}>{text}</span>
+              <span style={{ fontSize: "14px", color: "#E49009" }}>
+                {Math.round(progress)}%
+              </span>
+            </div>
+            <div
+              style={{
+                width: "100%",
+                height: "4px",
+                backgroundColor: "#f0f0f0",
+                borderRadius: "2px",
+                overflow: "hidden",
+              }}
+            >
+              <div
+                style={{
+                  width: `${progress}%`,
+                  height: "100%",
+                  backgroundColor: "#E49009",
+                  borderRadius: "2px",
+                  transition: "width 0.3s ease",
+                }}
+              />
+            </div>
+          </div>
+        );
+      }
 
       return (
         <div
