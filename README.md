@@ -1,4 +1,3 @@
-
 # voXel
 
 **voXel** is a Docker-based application requiring Docker Desktop with WSL2 support on Windows.
@@ -8,9 +7,7 @@
 ## Requirements
 
 - Docker Desktop (with WSL2 integration enabled)
-    
 - WSL2 Terminal on Windows
-    
 
 ---
 
@@ -40,7 +37,7 @@ WO_SETTINGS=
 
 ```bash
 # Clone the repository
-git clone https://github.com/neelkalpa/voXel 
+git clone https://github.com/neelkalpa/voXel
 
 # Change to the project directory
 cd voXel
@@ -54,11 +51,18 @@ chmod +x voXel.sh
 
 ---
 
+## Create a new Processing node with GPU Support
+
+```
+docker stop nodeodm
+docker rm nodeodm
+docker run -d --name nodeodm --network voxel_default -p 3000:3000 opendronemap/nodeodm
+```
+
 ## Notes
 
 - Ensure Docker Desktop is running with WSL2 backend.
 - The application will run on the host and port specified by `WO_HOST` and `WO_PORT`.
 - Media and database directories will be mapped according to the `.env` file.
-    
 
 ---
