@@ -65,34 +65,37 @@ class Dashboard extends React.Component {
 
     return (
       <Router basename="/dashboard">
-      <div className="dashboard-container">
-      <header className="dashboard-header">
-      <div className="welcome-message">Welcome Admin!</div>
-      </header>
-
-      <div className="header-actions" style={{ marginBottom: "32px" }}>
-      {this.props.permissions.indexOf("add_project") !== -1 && (
-        <button
-        type="button"
-        className="add-project-button"
-        onClick={this.handleAddProject}
+        <div
+          className="dashboard-container"
+          style={{ height: "100%", display: "flex", flexDirection: "column" }}
         >
-        <i className="glyphicon glyphicon-plus"></i> Add project
-        </button>
-      )}
-      </div>
+          <header className="dashboard-header">
+            <div className="welcome-message">Welcome Admin!</div>
+          </header>
 
-      <EditProjectDialog
-      saveAction={this.addNewProject}
-      ref={(domNode) => {
-        this.projectDialog = domNode;
-      }}
-      />
+          <div className="header-actions" style={{ marginBottom: "32px" }}>
+            {this.props.permissions.indexOf("add_project") !== -1 && (
+              <button
+                type="button"
+                className="add-project-button"
+                onClick={this.handleAddProject}
+              >
+                <i className="glyphicon glyphicon-plus"></i> Add project
+              </button>
+            )}
+          </div>
 
-      <main className="">
-      <Route path="/" component={projectList} />
-      </main>
-      </div>
+          <EditProjectDialog
+            saveAction={this.addNewProject}
+            ref={(domNode) => {
+              this.projectDialog = domNode;
+            }}
+          />
+
+          <main className="" style={{ flex: 1, minHeight: 0 }}>
+            <Route path="/" component={projectList} />
+          </main>
+        </div>
       </Router>
     );
   }

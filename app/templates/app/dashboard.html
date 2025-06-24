@@ -93,7 +93,7 @@
 					{% for key, value in params %}
 					data-{{key}}="{{value}}"
 					{% endfor %}
-					style="height: 100vh; overflow-y: auto; position: relative; padding-bottom: 60px;"
+					style="position: relative; min-height: calc(100vh - 60px);"
 				>
 					<div id="dashboard-placeholder" style="height: 100%">
 					<div style="display: flex; margin-top: 4px">
@@ -112,7 +112,7 @@
 
 					</div>
 				
-					<div style="position: fixed; bottom: 0; left: 220px; right: 0; padding: 10px; z-index: 1000;">
+					<div style="height: 60px; display: flex; align-items: center; justify-content: center; width: 100%;">
 						<p class="text-center copyright-text">© 2025 Vyomchara Pvt. Ltd. All Rights Reserved.</p>
 					</div>
 

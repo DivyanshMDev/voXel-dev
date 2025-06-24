@@ -1,14 +1,16 @@
 PluginsAPI.Dashboard.addNewTaskButton(
-	["dronedb/build/ImportView.js"],
-	function(args, ImportView) {
-        return React.createElement(ImportView, {
-                onNewTaskAdded: args.onNewTaskAdded,
-                projectId: args.projectId,
-                apiURL: "{{ api_url }}",
-        });
-	}
+  ["dronedb/build/ImportView.js"],
+  function (args, ImportView) {
+    return React.createElement(ImportView, {
+      onNewTaskAdded: args.onNewTaskAdded,
+      projectId: args.projectId,
+      apiURL: "{{ api_url }}",
+    });
+  }
 );
 
+// Share to DroneDB button commented out for now
+/*
 PluginsAPI.Dashboard.addTaskActionButton(['dronedb/build/ShareButton.js'],function(args, ShareButton){
 	var task = args.task;
 
@@ -17,3 +19,4 @@ PluginsAPI.Dashboard.addTaskActionButton(['dronedb/build/ShareButton.js'],functi
 	}
 }
 );
+*/

@@ -1,4 +1,7 @@
 #dashboard-app {
+  min-height: calc(100vh - 60px);
+  overflow-x: hidden;
+
   .row {
     &.no-margin {
       margin: 0;
@@ -35,7 +38,7 @@
   .add-project-button {
     display: flex;
     align-items: center;
-    background: linear-gradient(90deg, #555FC9 0%, #1878FF 100%);
+    background: linear-gradient(90deg, #555fc9 0%, #1878ff 100%);
     color: #fff;
     border: none;
     padding: 12px 20px;
@@ -60,5 +63,17 @@
     padding: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
     margin-right: 32px;
+  }
+
+  .project-list {
+    flex: 1;
+    min-height: 0;
+  }
+
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
   }
 }
