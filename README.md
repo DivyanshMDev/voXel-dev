@@ -45,6 +45,9 @@ cd voXel
 # Make the startup script executable
 chmod +x voXel.sh
 
+# Start voXel in normal mode (webodm) until the 3d view and dronedb import missing button issue gets resolved
+./voXel.sh start --dev
+
 # Start voXel in development mode
 ./voXel.sh start --dev
 ```
@@ -57,6 +60,9 @@ chmod +x voXel.sh
 docker stop nodeodm
 docker rm nodeodm
 docker run -d --name nodeodm --network voxel_default -p 3000:3000 opendronemap/nodeodm
+OR
+docker run -d --rm --name nodeodm2 -p 3000:3000 opendronemap/nodeodm
+
 ```
 
 ## Notes
@@ -64,5 +70,12 @@ docker run -d --name nodeodm --network voxel_default -p 3000:3000 opendronemap/n
 - Ensure Docker Desktop is running with WSL2 backend.
 - The application will run on the host and port specified by `WO_HOST` and `WO_PORT`.
 - Media and database directories will be mapped according to the `.env` file.
+
+##DroneDB
+
+```bash
+docker run -it --rm -p 5000:5000 -v "${PWD}:/data" dronedb/registry (FOR WINDOWS)
+```
+
 
 ---
